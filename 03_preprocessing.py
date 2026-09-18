@@ -72,3 +72,9 @@ print(df['embarked'].head(5))
 #Separate_Feature_and_Label
 x = df.drop('survived', axis = 1)
 y = df['survived']
+print(x.columns, x.shape)
+print(y, y.shape)
+
+#Save_Data
+df.to_csv('data/titanic_preprocessed.csv', index = False)
+printer('Data Saved')

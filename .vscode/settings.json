@@ -2,6 +2,7 @@
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "cSpell.words": [
         "openml",
-        "Pclass"
+        "Pclass",
+        "sibsp"
     ]
 }

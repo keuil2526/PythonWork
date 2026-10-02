@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 
 #Text_Print_With_Line
 def printer(text):
+    print()
     print('='*10, text, '='*10)
     print()
 

@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split as tts
 from sklearn.neighbors import KNeighborsClassifier as knn
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler as mms
+from sklearn.preprocessing import StandardScaler as ss
 
 #Text_Print_With_Line
 def printer(text):
@@ -34,3 +35,18 @@ model.fit(x_train, y_train)
 #Accuracy_Test
 accuracy = model.score(x_test, y_test)
 print(f'Accuracy_None : {accuracy : .4f}')
+
+#mms
+scaler = mms()
+x_train_mm = scaler.fit_transform(x_train)
+x_test_mm = scaler.transform(x_test)
+
+#Scaled_Data
+knn_model = knn(n_neighbors = 5)
+
+#Train_Model
+knn_model.fit(x_train_mm, y_train)
+
+#Accuracy_Test
+accuracy = knn_model.score(x_test_mm, y_test)
+print(f'Accuracy_mm : {accuracy : .4f}')

@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split as tts
+from sklearn.model_selection import cross_val_score as cvs
 from sklearn.neighbors import KNeighborsClassifier as knn
-from sklearn.preprocessing import MinMaxScaler as mms
+from sklearn.preprocessing import MinMaxScaler as mMs
 from sklearn.preprocessing import StandardScaler as ss
 
 #Text_Print_With_Line
@@ -10,7 +11,7 @@ def printer(text):
     print('='*10, text, '='*10)
     print()
 
-#Import_Preprocessing_Data
+#Import_PreprocessedData
 df = pd.read_csv('data/titanic_preprocessed.csv')
 print(df.head(5))
 printer('Data Load Completed')
@@ -36,17 +37,40 @@ model.fit(x_train, y_train)
 accuracy = model.score(x_test, y_test)
 print(f'Accuracy_None : {accuracy : .4f}')
 
-#mms
-scaler = mms()
-x_train_mm = scaler.fit_transform(x_train)
-x_test_mm = scaler.transform(x_test)
+#Minmax_Scaling
+mM_scaler = mMs()
+x_train_mM = mM_scaler.fit_transform(x_train)
+x_test_mM = mM_scaler.transform(x_test)
 
 #Scaled_Data
 knn_model = knn(n_neighbors = 5)
 
 #Train_Model
-knn_model.fit(x_train_mm, y_train)
+knn_model.fit(x_train_mM, y_train)
 
 #Accuracy_Test
-accuracy = knn_model.score(x_test_mm, y_test)
-print(f'Accuracy_mm : {accuracy : .4f}')
+accuracy_mM = knn_model.score(x_test_mM, y_test)
+print(f'Accuracy_mM : {accuracy_mM : .4f}')
+
+#Standard_Scaling
+std_scaler = ss()
+std_scaler.fit(x_train)
+x_train_std = std_scaler.fit_transform(x_train)
+x_test_std = std_scaler.transform(x_test)
+
+#Train_Model
+knn_model.fit(x_train_std, y_train)
+
+#Accuracy_Test
+accuracy_ss = knn_model.score(x_test_std, y_test)
+print(f'Accuracy_std : {accuracy_ss : .4f}')
+
+#Cross_Validation
+x_std = std_scaler.fit_transform(x)
+scores = cvs(knn(n_neighbors = 5), x_std, y, cv = 5)
+
+printer('Each Fold Accuracy')
+for i, score in enumerate(scores, start = 1):
+    print(f"Fold_{i} : {score:.4f}")
+print()
+print(f"Average_Accuracy : {scores.mean():.4f}")

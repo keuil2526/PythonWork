@@ -1,8 +1,15 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "cSpell.words": [
+        "figsize",
+        "fontsize",
+        "importances",
+        "Minmax",
         "openml",
         "Pclass",
-        "sibsp"
+        "sibsp",
+        "xlabel",
+        "xticks",
+        "ylabel"
     ]
 }

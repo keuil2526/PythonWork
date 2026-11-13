@@ -1,10 +1,12 @@
 {
     "python-envs.defaultEnvManager": "ms-python.python:venv",
     "cSpell.words": [
+        "bsms",
         "figsize",
         "fontsize",
         "importances",
         "Minmax",
+        "NAND",
         "openml",
         "Pclass",
         "sibsp",
